@@ -1,52 +1,36 @@
 import React, { Component } from 'react';
-import { Image, Container, Header, Button, } from 'semantic-ui-react';
-import rock from './rock.png';
-import paper from './paper.png';
-import scissors from './scissors.png';
+import GameDisplay from './GameDisplay'
 
 
 class App extends Component {
   state = { player1Choice: "",
             player2Choice: "",
-            turn: "player1",
+            turn: true,
+            showChoices: true,
   }
   clickHandler = (choice) => {
-    debugger
+    const { turn, } = this.state;
+    if (turn) {
+      this.setState({ player1Choice: choice, turn: !turn, });
+    } else {
+      this.setState({ player2Choice: choice, turn: !turn,  });
+      this.game()
+    }
+
   }
-  componentDidUpdate() {
-    
+  game() {
+    debugger
+    const { player1Choice, player2Choice, } = this.state;
+    if (player1Choice === player2Choice) {
+      alert("Its a tie")
+    }
   }
   render() {
     return (
-      <Container style={styles.parentContainer}>
-        <Header as="h1">Rock, Paper, Scissors</Header>
-        <div style={styles.container}>
-          <Button onClick={() => this.clickHandler("rock")}>
-            <Image src={rock}/>
-          </Button>
-          <Button onClick={() => this.clickHandler("paper")}>
-            <Image src={paper}/>
-          </Button>
-          <Button onClick={() => this.clickHandler("scissors")}>
-            <Image src={scissors}/>
-          </Button>
-        </div>
-      </Container>
+     <GameDisplay clickHandler={this.clickHandler} />
     );
   }
 }
-const styles = {
-  container: {
-    display: "flex",
-  },
-  parentContainer: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  }
-}
-    
 
 
 export default App;
