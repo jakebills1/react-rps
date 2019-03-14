@@ -1,28 +1,55 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Image, Container, Header, Button, } from 'semantic-ui-react';
+import rock from './rock.png';
+import paper from './paper.png';
+import scissors from './scissors.png';
+
 
 class App extends Component {
+  state = { player1Choice: "",
+            player2Choice: "",
+            turn: "player1",
+  }
+  clickHandler = (choice) => {
+    debugger
+  }
+  componentDidUpdate() {
+    
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Container style={styles.parentContainer}>
+        <Header as="h1">Rock, Paper, Scissors</Header>
+        <div style={styles.container}>
+          <Button onClick={() => this.clickHandler("rock")}>
+            <Image src={rock}/>
+          </Button>
+          <Button onClick={() => this.clickHandler("paper")}>
+            <Image src={paper}/>
+          </Button>
+          <Button onClick={() => this.clickHandler("scissors")}>
+            <Image src={scissors}/>
+          </Button>
+        </div>
+      </Container>
     );
   }
 }
+const styles = {
+  container: {
+    display: "flex",
+  },
+  parentContainer: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  }
+}
+    
+
 
 export default App;
+          
+          
+
